@@ -29,6 +29,8 @@ jobs:
           persist-credentials: false
       - uses: ./.github/actions/setup-rbmt
       - name: "Run tests"
+        env:
+          RBMT_LOG_LEVEL: "quiet"
         run: cargo rbmt test --toolchain ${{ matrix.toolchain }} --lock-file ${{ matrix.dep }}
 
   Check:
@@ -45,6 +47,8 @@ jobs:
           persist-credentials: false
       - uses: ./.github/actions/setup-rbmt
       - name: "Run ${{ matrix.task }}"
+        env:
+          RBMT_LOG_LEVEL: "quiet"
         run: cargo rbmt ${{ matrix.task }}
 
   Prerelease:
@@ -58,6 +62,8 @@ jobs:
           fetch-depth: 0 # History required for version bump detection.
       - uses: ./.github/actions/setup-rbmt
       - name: "Run pre-release checks"
+        env:
+          RBMT_LOG_LEVEL: "quiet"
         run: cargo rbmt prerelease --baseline ${{ github.event.pull_request.base.sha || github.event.before }}
 
   # Non cargo-rbmt jobs manage their toolchain version directly.
