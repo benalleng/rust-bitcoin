@@ -30,7 +30,7 @@ jobs:
       - uses: ./.github/actions/setup-rbmt
       - name: "Run tests"
         env:
-          RBMT_LOG_LEVEL: "quiet"
+          RBMT_LOG_LEVEL: "progress"
         run: cargo rbmt test --toolchain ${{ matrix.toolchain }} --lock-file ${{ matrix.dep }}
 
   Check:
@@ -48,7 +48,7 @@ jobs:
       - uses: ./.github/actions/setup-rbmt
       - name: "Run ${{ matrix.task }}"
         env:
-          RBMT_LOG_LEVEL: "quiet"
+          RBMT_LOG_LEVEL: "progress"
         run: cargo rbmt ${{ matrix.task }}
 
   Prerelease:
